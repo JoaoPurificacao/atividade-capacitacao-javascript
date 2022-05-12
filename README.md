@@ -12,6 +12,7 @@
     <li>Utilização de Estruturas Codicionais e de Repetição</li>
     <li>Definição e Utilização de Funções</li>
     <li>Manipulações da estrutura do DOM</li>
+    <li>Utilização de eventos do DOM</li>
 </ul>
 <h3>Contextualização da Atividade</h3>
 <p>
@@ -51,5 +52,4 @@
     <li>Será disponibilizado um arquivo HTML e CSS básico para realização da atividade</li>
     <li>A manipulação dos arquivos disponibilizados é permitida e incentivada</li>
     <li>Solicitado não apagar a linha 68 do HTML disponibilizado</li>
-
 </ul>
