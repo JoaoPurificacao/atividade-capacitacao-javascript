@@ -9,16 +9,16 @@
     <link rel="stylesheet" href="./css/style.css">
     <title>Atividade JavaScript | Trainee Praxis</title>
 </head>
-<body onload="garantia">
+<body>
     <main class="formulario">
-        <form id="formulario__registrar" class="formulario__registrar ">
+        <form class="formulario__registrar">
             <div class="mb-3">
                 <label class="form-label">Nome Completo</label>
                 <input type="text" class="form-control borda__verde">
             </div>
             <div class="mb-3">
               <label class="form-label">CPF</label>
-              <input id="registrar__cpf" type="text" class="form-control" maxlength="14">
+              <input type="text" class="form-control" maxlength="14">
             </div>
             <div class="mb-3">
               <label class="form-label">Email</label>
@@ -26,21 +26,21 @@
             </div>
             <div class="mb-3">
               <label class="form-label">Telefone</label>
-              <input type="text" class="form-control" maxlength="20">
+              <input type="text" class="form-control" maxlength="14">
             </div>
             <div>
-                <button id="botao__registrar" class="btn btn-success botao__registro">Registrar</button>
-                <button id="botao__mostrar" class="btn btn-primary botao__registro">Mostrar Tabela</button>
+                <button class="btn btn-success">Registrar</button>
+                <button  class="btn btn-primary">Mostrar Tabela</button>
             </div>
         </form>
-        <form id="formulario__corrigir" class="formulario__corrigir esconder">
+        <form class="formulario__corrigir">
             <div class="mb-3">
                 <label class="form-label">Nome Completo</label>
                 <input type="text" class="form-control">
             </div>
             <div class="mb-3">
               <label class="form-label">CPF</label>
-              <input id="corrigir__cpf" type="text" class="form-control" maxlength="14">
+              <input type="text" class="form-control" maxlength="14">
             </div>
             <div class="mb-3">
               <label class="form-label">Email</label>
@@ -48,20 +48,21 @@
             </div>
             <div class="mb-3">
               <label class="form-label">Telefone</label>
-              <input type="text" class="form-control" maxlength="20">
+              <input type="text" class="form-control" maxlength="14">
             </div>
             <div>
-              <button id="botao__corrigir" class="btn btn-warning botao__registro">Corrigir</button>
-              <button id="botao__excluir" class="btn btn-danger">Excluir linha</button>
+              <button class="btn btn-warning">Corrigir</button>
+              <button  class="btn btn-danger">Excluir linha</button>
             </div>
         </form>
     </main>
-    <section id="tabela" class="esconder">
+    <section>
         <table class="table table-secondary table-hover table-bordered">
             <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nome Completo</th>
+                <th scope="col">CPF</th>
                 <th scope="col">Email</th>
                 <th scope="col">Telefone</th>
               </tr>
@@ -70,13 +71,13 @@
               <tr>
                 <th scope="row">1</th>
                 <td>Pedro Antonio de Santos</td>
+                <td>123.456.789-00</td>
                 <td>pedro@gmail.com</td>
                 <td>(71) 9912-4030</td>
               </tr>
             </tbody>
           </table>
     </section>
-    <script src="./javascript/script.js"></script>
     <!-- Não remova o script abaixo: -->
     <script src="./assets/prevencao.js"></script> 
 </body>
