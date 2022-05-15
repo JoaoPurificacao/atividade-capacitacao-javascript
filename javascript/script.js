@@ -6,6 +6,8 @@ let formCorrigir = document.getElementById('formulario__corrigir')
 let botRegistrar = document.getElementById('botao__registrar');
 let botCorrigir = document.getElementById('botao__corrigir');
 let botMostrar = document.getElementById('botao__mostrar');
+
+//Tabela
 let tabela = document.getElementById('tabela');
 let corpoTabela = document.getElementsByTagName('tbody')[0]
 
@@ -18,7 +20,15 @@ let contagemLinhas = corpoTabela.getElementsByTagName('tr').length;
 let linhaSelecionada;
 
 let inputRegistrarCpf = document.getElementById('registrar__cpf');
-inputRegistrarCpf.addEventListener('input', mascaracpf);
+let inputCorrigirCpf = document.getElementById('corrigir__cpf');
+inputRegistrarCpf.addEventListener('input', MascaraCpf);
+inputCorrigirCpf.addEventListener('input', MascaraCpf);
+
+let inputRegistrarTelefone = document.getElementById('registrar__telefone');
+let inputCorrigirTelefone = document.getElementById('corrigir__telefone');
+inputRegistrarTelefone.addEventListener('input', MascaraTelefone);
+inputCorrigirTelefone.addEventListener('input', MascaraTelefone);
+
 
 function seMostrar(e){
     console.log(this);
@@ -34,11 +44,11 @@ function VisibilidadeTabela (x){
     Passando_rodo();
 };
 
-function mascaracpf(){
-    if(inputRegistrarCpf.value.length == 11 && inputRegistrarCpf.value.indexOf('.') == -1){
-        let cpfNumeros = inputRegistrarCpf.value
+function MascaraCpf(){
+    if(this.value.length == 11 && this.value.indexOf('.') == -1){
+        let cpfNumeros = this.value
         let cpfFormatado = [];
-        for(let x = 0; x < inputRegistrarCpf.value.length; x++){
+        for(let x = 0; x < this.value.length; x++){
             if(x == 2 || x == 5 ){
                 cpfFormatado.push(cpfNumeros[x])
                 cpfFormatado.push('.')
@@ -49,12 +59,54 @@ function mascaracpf(){
                 cpfFormatado.push(cpfNumeros[x])
             }
         }
-        inputRegistrarCpf.value = cpfFormatado.join('')
-    }else if(inputRegistrarCpf.value.indexOf('.') != -1){
+        this.value = cpfFormatado.join('')
+    }else if(this.value.indexOf('.') != -1){
         let x = 0
-        while(inputRegistrarCpf.value.indexOf('.') != -1 && x !=3){
-            inputRegistrarCpf.value = inputRegistrarCpf.value.replace('.','');
-            inputRegistrarCpf.value = inputRegistrarCpf.value.replace('-','')
+        while(this.value.indexOf('.') != -1 && x !=3){
+            this.value = this.value.replace('.','');
+            this.value = this.value.replace('-','')
+            x++
+        }
+    }
+};
+
+function MascaraTelefone(){
+    if(this.value.length == 11 && this.value.indexOf('(') == -1){
+        let telefoneNumeros = this.value
+        let telefoneFormatado = [];
+        console.log(telefoneNumeros)
+        for(let x = 0; x < this.value.length; x++){
+            switch(x){
+                case 0:
+                    telefoneFormatado.push(telefoneNumeros[x]);
+                    telefoneFormatado.unshift('(');
+                    break;
+                case 1:
+                    telefoneFormatado.push(telefoneNumeros[x])
+                    telefoneFormatado.push(')')
+                    break;
+                case 2:
+                    telefoneFormatado.push(' ')
+                    telefoneFormatado.push(telefoneNumeros[x])
+                    telefoneFormatado.push(' ')
+                    break;
+                case 6:
+                    telefoneFormatado.push(telefoneNumeros[x])
+                    telefoneFormatado.push('-')
+                    break;
+                default:
+                    telefoneFormatado.push(telefoneNumeros[x])
+                    break;    
+            }
+        }
+        this.value = telefoneFormatado.join('')
+    }else if(this.value.indexOf(' ') != -1){
+        let x = 0
+        while(this.value.indexOf(' ') != -1 && x !=3){
+            this.value = this.value.replace('(','');
+            this.value = this.value.replace(')','')
+            this.value = this.value.replace('-','')
+            this.value = this.value.replace(' ','')
             x++
         }
     }
@@ -124,6 +176,7 @@ function CorrigirLinha(){
     for(let i = 0; i < inputs.length; i++){
         celulas[i].textContent = inputs[i].value
     }
+    linhaSelecionada.classList.remove('table-info')
     LimpezaInputs(formCorrigir);
     formRegistrar.classList.remove('esconder');
     formCorrigir.classList.add('esconder');
