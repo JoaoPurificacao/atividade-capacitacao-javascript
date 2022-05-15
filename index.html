@@ -11,10 +11,10 @@
 </head>
 <body onload="garantia">
     <main class="formulario">
-        <form id="formulario__registrar" class="formulario__registrar ">
+        <form id="formulario__registrar" class="formulario__registrar">
             <div class="mb-3">
                 <label class="form-label">Nome Completo</label>
-                <input type="text" class="form-control borda__verde">
+                <input id="registrar__nome" type="text" class="form-control borda__verde">
             </div>
             <div class="mb-3">
               <label class="form-label">CPF</label>
@@ -22,11 +22,11 @@
             </div>
             <div class="mb-3">
               <label class="form-label">Email</label>
-              <input type="email" class="form-control">
+              <input id="registrar__email" type="email" class="form-control">
             </div>
             <div class="mb-3">
               <label class="form-label">Telefone</label>
-              <input type="text" class="form-control" maxlength="20">
+              <input id="registrar__telefone" type="text" class="form-control" maxlength="20">
             </div>
             <div>
                 <button id="botao__registrar" class="btn btn-success botao__registro">Registrar</button>
@@ -36,7 +36,7 @@
         <form id="formulario__corrigir" class="formulario__corrigir esconder">
             <div class="mb-3">
                 <label class="form-label">Nome Completo</label>
-                <input type="text" class="form-control">
+                <input id="corrigir__nome" type="text" class="form-control">
             </div>
             <div class="mb-3">
               <label class="form-label">CPF</label>
@@ -44,11 +44,11 @@
             </div>
             <div class="mb-3">
               <label class="form-label">Email</label>
-              <input type="email" class="form-control">
+              <input id="corrigir__email" type="email" class="form-control">
             </div>
             <div class="mb-3">
               <label class="form-label">Telefone</label>
-              <input type="text" class="form-control" maxlength="20">
+              <input id="corrigir__telefone" type="text" class="form-control" maxlength="20">
             </div>
             <div>
               <button id="botao__corrigir" class="btn btn-warning botao__registro">Corrigir</button>
@@ -62,16 +62,18 @@
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Nome Completo</th>
+                <th scope="col">CPF</th>
                 <th scope="col">Email</th>
                 <th scope="col">Telefone</th>
               </tr>
             </thead>
-            <tbody>
-              <tr>
+            <tbody id="tabela__corpo">
+              <tr id="1" class="cadastro__row">
                 <th scope="row">1</th>
                 <td>Pedro Antonio de Santos</td>
+                <td>987.654.321-00</td>
                 <td>pedro@gmail.com</td>
-                <td>(71) 9912-4030</td>
+                <td>(71) 99912-4030</td>
               </tr>
             </tbody>
           </table>
