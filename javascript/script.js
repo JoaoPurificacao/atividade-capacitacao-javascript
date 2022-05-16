@@ -6,6 +6,7 @@ let formCorrigir = document.getElementById('formulario__corrigir')
 let botRegistrar = document.getElementById('botao__registrar');
 let botCorrigir = document.getElementById('botao__corrigir');
 let botMostrar = document.getElementById('botao__mostrar');
+let botExcluir = document.getElementById('botao__excluir');
 
 //Tabela
 let tabela = document.getElementById('tabela');
@@ -14,10 +15,16 @@ let corpoTabela = document.getElementsByTagName('tbody')[0]
 botRegistrar.addEventListener('click', AdicaoNovaLinha);
 botCorrigir.addEventListener('click', CorrigirLinha);
 botMostrar.addEventListener('click', VisibilidadeTabela);
+botExcluir.addEventListener('click', RemoverLinha);
 
 
 let contagemLinhas = corpoTabela.getElementsByTagName('tr').length;
 let linhaSelecionada;
+
+let inputRegistrarNome = document.getElementById('registrar__nome');
+let inputCorrigirNome = document.getElementById('corrigir__nome');
+inputRegistrarNome.addEventListener('input',ValidacaoNome)
+inputCorrigirNome.addEventListener('input',ValidacaoNome)
 
 let inputRegistrarCpf = document.getElementById('registrar__cpf');
 let inputCorrigirCpf = document.getElementById('corrigir__cpf');
@@ -44,7 +51,21 @@ function VisibilidadeTabela (x){
     Passando_rodo();
 };
 
+function ValidacaoNome(){
+    for(let i = 0; i< 10; i++){
+        if(this.value.indexOf(`${i}`) != -1){
+            this.value = this.value.replace(`${i}`,'')
+        }
+    }
+}
+
+function ValidacaoNumeros(input){
+    input.value = input.value.replace(/\D/g,'')
+}
+
+
 function MascaraCpf(){
+    ValidacaoNumeros(this)
     if(this.value.length == 11 && this.value.indexOf('.') == -1){
         let cpfNumeros = this.value
         let cpfFormatado = [];
@@ -71,10 +92,10 @@ function MascaraCpf(){
 };
 
 function MascaraTelefone(){
+    ValidacaoNumeros(this)
     if(this.value.length == 11 && this.value.indexOf('(') == -1){
         let telefoneNumeros = this.value
         let telefoneFormatado = [];
-        console.log(telefoneNumeros)
         for(let x = 0; x < this.value.length; x++){
             switch(x){
                 case 0:
@@ -190,3 +211,11 @@ function CarregarCadastro(linha){
     }
     return linha
 };
+
+function RemoverLinha(){
+    LimpezaInputs(formRegistrar);
+    LimpezaInputs(formCorrigir);
+    linhaSelecionada.parentNode.removeChild(linhaSelecionada);
+    formRegistrar.classList.remove('esconder');
+    formCorrigir.classList.add('esconder');
+}
