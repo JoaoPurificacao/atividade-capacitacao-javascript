@@ -140,6 +140,15 @@ function Passando_rodo(){
     };
 };
 
+function RecontagemLinhasTabela(){
+    let cabecalhos = corpoTabela.getElementsByTagName('th')
+    for(let i = 0; i < cabecalhos.length;i++){
+        let count = i
+        cabecalhos[i].textContent = ++count
+    }
+    contagemLinhas = corpoTabela.getElementsByTagName('tr').length;
+}
+
 function SelecionarLinha(){
     let oldSelectRow = document.querySelectorAll('.table-info')[0];
     if(oldSelectRow == undefined){
@@ -216,6 +225,7 @@ function RemoverLinha(){
     LimpezaInputs(formRegistrar);
     LimpezaInputs(formCorrigir);
     linhaSelecionada.parentNode.removeChild(linhaSelecionada);
+    RecontagemLinhasTabela();
     formRegistrar.classList.remove('esconder');
     formCorrigir.classList.add('esconder');
 }
