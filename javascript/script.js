@@ -21,16 +21,22 @@ botExcluir.addEventListener('click', RemoverLinha);
 let contagemLinhas = corpoTabela.getElementsByTagName('tr').length;
 let linhaSelecionada;
 
+
+//Validações nos Campos de Nome
 let inputRegistrarNome = document.getElementById('registrar__nome');
 let inputCorrigirNome = document.getElementById('corrigir__nome');
 inputRegistrarNome.addEventListener('input',ValidacaoNome)
 inputCorrigirNome.addEventListener('input',ValidacaoNome)
 
+
+//Mascaras nos Campos CPF
 let inputRegistrarCpf = document.getElementById('registrar__cpf');
 let inputCorrigirCpf = document.getElementById('corrigir__cpf');
 inputRegistrarCpf.addEventListener('input', MascaraCpf);
 inputCorrigirCpf.addEventListener('input', MascaraCpf);
 
+
+//Mascaras nos Campos Telefone
 let inputRegistrarTelefone = document.getElementById('registrar__telefone');
 let inputCorrigirTelefone = document.getElementById('corrigir__telefone');
 inputRegistrarTelefone.addEventListener('input', MascaraTelefone);
@@ -153,9 +159,6 @@ function SelecionarLinha(){
     let oldSelectRow = document.querySelectorAll('.table-info')[0];
     if(oldSelectRow == undefined){
         this.classList.add('table-info');
-    }else if(oldSelectRow.id != this.id){
-        oldSelectRow.classList.remove('table-info')
-        this.classList.add('table-info');
     }else{
         oldSelectRow.classList.remove('table-info')
         this.classList.add('table-info');
@@ -166,8 +169,8 @@ function SelecionarLinha(){
 };
 
 function LimpezaInputs(formulario){
-    formulario.getElementsByTagName('input');
-    for(let item of formulario){
+    let inputs = formulario.getElementsByTagName('input');
+    for(let item of inputs){
         item.value = '';
     }
 }
@@ -196,6 +199,7 @@ function AdicaoNovaLinha(){
     CriacaoLinha();
     Passando_rodo();
     LimpezaInputs(formRegistrar);
+    ConverterTabelaObjeto();
     formRegistrar.classList.remove('esconder');
     formCorrigir.classList.add('esconder');
 }
@@ -208,6 +212,7 @@ function CorrigirLinha(){
     }
     linhaSelecionada.classList.remove('table-info')
     LimpezaInputs(formCorrigir);
+    ConverterTabelaObjeto();
     formRegistrar.classList.remove('esconder');
     formCorrigir.classList.add('esconder');
 };
@@ -228,4 +233,28 @@ function RemoverLinha(){
     RecontagemLinhasTabela();
     formRegistrar.classList.remove('esconder');
     formCorrigir.classList.add('esconder');
+}
+
+function ConverterTabelaObjeto(){
+    let objTabela = {};
+    let linha = corpoTabela.getElementsByTagName('tr');
+    for(let i = 0; i < contagemLinhas;i++){
+        objTabela[i] = ConverterLinhaArray(i);
+    };
+    console.log(objTabela);
+}
+
+
+function ConverterLinhaArray(index){
+    let arrayLinha = [];
+    let linha = corpoTabela.getElementsByTagName('tr')[index];
+    for(let j = 0; j < 4; j++){
+        if(j == 0){
+            arrayLinha.push(linha.getElementsByTagName('th')[j].textContent);
+            arrayLinha.push(linha.getElementsByTagName('td')[j].textContent);
+        }else{
+            arrayLinha.push(linha.getElementsByTagName('td')[j].textContent);
+        }
+    };
+    return arrayLinha;
 }
