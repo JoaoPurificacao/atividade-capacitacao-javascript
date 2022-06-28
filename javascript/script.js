@@ -21,6 +21,7 @@ botExcluir.addEventListener('click', RemoverLinha);
 let contagemLinhas = corpoTabela.getElementsByTagName('tr').length;
 let linhaSelecionada;
 
+window.addEventListener('load', RecarregarTabelaStorage);
 
 //Validações nos Campos de Nome
 let inputRegistrarNome = document.getElementById('registrar__nome');
@@ -199,7 +200,7 @@ function AdicaoNovaLinha(){
     CriacaoLinha();
     Passando_rodo();
     LimpezaInputs(formRegistrar);
-    ConverterTabelaObjeto();
+    CriarCadastroStorage()
     formRegistrar.classList.remove('esconder');
     formCorrigir.classList.add('esconder');
 }
@@ -212,7 +213,7 @@ function CorrigirLinha(){
     }
     linhaSelecionada.classList.remove('table-info')
     LimpezaInputs(formCorrigir);
-    ConverterTabelaObjeto();
+    CriarCadastroStorage()
     formRegistrar.classList.remove('esconder');
     formCorrigir.classList.add('esconder');
 };
@@ -231,6 +232,7 @@ function RemoverLinha(){
     LimpezaInputs(formCorrigir);
     linhaSelecionada.parentNode.removeChild(linhaSelecionada);
     RecontagemLinhasTabela();
+    CriarCadastroStorage()
     formRegistrar.classList.remove('esconder');
     formCorrigir.classList.add('esconder');
 }
@@ -242,6 +244,7 @@ function ConverterTabelaObjeto(){
         objTabela[i] = ConverterLinhaArray(i);
     };
     console.log(objTabela);
+    return objTabela;   
 }
 
 
@@ -257,4 +260,41 @@ function ConverterLinhaArray(index){
         }
     };
     return arrayLinha;
+}
+
+function ConverterArrayLinha(array){
+    let linhaArray = document.createElement('tr');
+    linhaArray.classList.add('cadastro__row')
+    for(let k = 0; k < array.length; k++){
+        if(k == 0){
+            let celulaCabecalho = document.createElement('th')
+            celulaCabecalho.scope = "row"
+            celulaCabecalho.textContent = array[k];
+            linhaArray.id = array[k];
+            linhaArray.appendChild(celulaCabecalho);
+        }else{
+            let celulaConteudo = document.createElement('td')
+            celulaConteudo.textContent = array[k];
+            linhaArray.appendChild(celulaConteudo);
+        }
+    }
+    console.log(linhaArray);
+    return linhaArray;
+}
+
+function CriarCadastroStorage(){
+    let tabelaJSON = JSON.stringify(ConverterTabelaObjeto());
+    localStorage.setItem('cadastro',tabelaJSON);
+};
+
+function RecarregarTabelaStorage(){
+    let cadastrosJSON = localStorage.getItem('cadastro');
+    let cadastrosObj = JSON.parse(cadastrosJSON);
+    console.log(cadastrosObj);
+    for(let cadastro in cadastrosObj){
+        console.log(cadastrosObj[cadastro]);
+        let linha = ConverterArrayLinha(cadastrosObj[cadastro]);
+        corpoTabela.appendChild(linha)
+    }
+    RecontagemLinhasTabela()
 }
